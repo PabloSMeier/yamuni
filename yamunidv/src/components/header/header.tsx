@@ -24,10 +24,19 @@ export const Header = () => {
   };
 
   return (
-    <header className="w-full h-[10vh] p-3 z-50 fixed bg-white text-primary font-bold border-b-2 border-primaryB font-yk flex items-center justify-center">
+    <header className="w-full text-xl h-[15vh] p-3 z-50 fixed bg-white text-primary font-bold border-b-2 border-primaryB font-yk flex items-center justify-center">
       <div className="w-full max-w-4xl flex items-center justify-between flex-row">
-        <button onClick={() => scrollToSection("inicio")}>
-          <Image src="/logo.jpg" alt="" width={90} height={90} />
+        <button
+          className="relative h-[12.5vh] w-[12.5vh]"
+          onClick={() => scrollToSection("inicio")}
+        >
+          <Image
+            src="/logo.jpg"
+            alt=""
+            layout="fill"
+            objectFit="cover"
+            className="w-full h-full"
+          />
         </button>
 
         <div className="flex items-center justify-center sm:hidden sm:absolute">
@@ -39,24 +48,25 @@ export const Header = () => {
               <div
                 className={`w-9 h-14 cursor-pointer flex flex-col items-center ${
                   isOpen
-                    ? "justify-evenly  space-y-0"
+                    ? "justify-evenly  space-y-1"
                     : "justify-center space-y-1"
                 }`}
               >
                 <div
                   className={` ${
-                    isOpen && "w-[80%] rotate-[45deg] "
-                  } w-[75%] h-[3px] bg-primaryB rounded-md transition-all
+                    isOpen &&
+                    "w-8 rotate-[45deg] translate-x-1 translate-y-[1px]"
+                  } w-8 h-1 bg-primaryB rounded-md transition-all
                    duration-400 origin-left`}
                 ></div>
                 <div
-                  className={`w-[75%] h-[3px] bg-primaryB rounded-md transition-all duration-400 origin-center ${
+                  className={`w-8 h-1 bg-primaryB rounded-md transition-all duration-400 origin-center ${
                     isOpen && "hidden"
                   }`}
                 ></div>
                 <div
-                  className={`${isOpen && "w-[80%] rotate-[-45deg] "}
-                  w-[75%] h-[3px] bg-primaryB rounded-md transition-all duration-400 origin-left 
+                  className={`${isOpen && "w-8 rotate-[-45deg] translate-x-1  "}
+                  w-8 h-1 bg-primaryB rounded-md transition-all duration-400 origin-left 
                   `}
                 ></div>
               </div>
@@ -64,7 +74,7 @@ export const Header = () => {
           </button>
           {isOpen ? (
             <div
-              className={`h-[90vh] w-full flex flex-col items-center text-xl pt-6 space-y-6 bg-white absolute top-[10vh] right-0 z-10`}
+              className={`h-[90vh] w-full flex flex-col items-center text-xl pt-6 space-y-6 bg-white absolute top-[15vh] right-0 z-10`}
             >
               <button
                 onClick={() => scrollToSection("inicio")}
