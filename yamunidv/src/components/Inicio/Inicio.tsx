@@ -80,7 +80,7 @@ const Inicio = () => {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               onClick={() => scrollToSection("contacto")}
-              className="px-6 py-3 bg-primaryB text-white font-semibold rounded-md hover:bg-transparent border-2 border-primaryB hover:text-primaryB ease-in-out duration-300 flex flex-row items-center space-x-2"
+              className="px-6 py-3  text-white font-semibold rounded-md hover:bg-transparent border-2 border-primaryB hover:text-white hover:bg-primaryB ease-in-out duration-300 flex flex-row items-center space-x-2"
             >
               <h2>
                 ¿Querés contratar <br /> nuestros servicios?
@@ -97,8 +97,8 @@ const Inicio = () => {
                 strokeLinejoin="round"
                 className={`${
                   isHovered
-                    ? "stroke-primaryB duration-300"
-                    : "stroke-white duration-300 -rotate-90"
+                    ? "stroke-white duration-300"
+                    : "stroke-primaryB duration-300 -rotate-90"
                 }`}
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
