@@ -27,7 +27,7 @@ export const Header = () => {
     <header className="w-full h-[10vh] p-3 z-50 fixed bg-white text-primary font-bold border-b-2 border-primaryB font-yk flex items-center justify-center">
       <div className="w-full max-w-4xl flex items-center justify-between flex-row">
         <button onClick={() => scrollToSection("inicio")}>
-          <Image src="/image.png" alt="" width={180} height={180} />
+          <Image src="/logo.jpg" alt="" width={90} height={90} />
         </button>
 
         <div className="flex items-center justify-center sm:hidden sm:absolute">
