@@ -34,7 +34,7 @@ const Inicio = () => {
   return (
     <section
       id="inicio"
-      className="h-[122.5vh] sm:h-[100vh] flex flex-col  justify-center items-center w-full space-y-4 space-x-4"
+      className="h-[100vh] flex flex-col  justify-center items-center w-full space-y-4 space-x-4"
     >
       <div className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden">
         {/* Carrusel de fondo */}
