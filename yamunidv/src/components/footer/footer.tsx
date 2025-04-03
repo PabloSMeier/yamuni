@@ -19,7 +19,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bottom-0  w-full h-[10vh] z-50 static bg-white flex justify-center items-center text-primary font-bold border-t-2 border-primaryB font-yk">
+    <footer className="bottom-0 px-3 w-full h-[10vh] z-50 static bg-white flex justify-center items-center text-primary font-bold border-t-2 border-primaryB font-yk">
       <div className="max-w-4xl w-full grid grid-cols-3 items-center">
         <button onClick={() => scrollToSection("inicio")}>
           <Image src="/image.png" alt="" width={180} height={180} />
