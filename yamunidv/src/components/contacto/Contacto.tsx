@@ -76,7 +76,8 @@ export const Contacto = () => {
           }`}
           ref={ref}
         >
-          Hablame directamente a mi correo: <strong>yamuni@gmail.com</strong>
+          Hablanos directamente a nuestro correo:{" "}
+          <strong>yamuni@gmail.com</strong>
         </motion.h2>
       </div>
       <motion.div
