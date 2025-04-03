@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Estilos de la barra de desplazamiento para navegadores basados en WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0074d9; /* Color del "pulgar" */
+  border-radius: 6px; /* Bordes redondeados */
+  border: 3px solid #ffffff; /* Espacio alrededor del pulgar */
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff; /* Color de la pista */
+  border-radius: 6px; /* Bordes redondeados de la pista */
+}
