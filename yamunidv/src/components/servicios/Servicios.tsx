@@ -18,10 +18,11 @@ const Servicios = () => {
   const isInView = useInView(ref);
 
   const [isBoxOpen, setIsBoxOpen] = useState(false);
-  const [selectedSet, setSelectedSet] = useState<string>("");
-  const [currentSet, setCurrentSet] = useState<IImageSet[]>([]);
+  const [selectedService, setSelectedService] = useState<IServicio | null>(
+    null
+  );
+  const [selectedTrabajo, setSelectedTrabajo] = useState<ITrabajo | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [service, setService] = useState<IServicio["name"]>();
 
   useEffect(() => {
     if (isBoxOpen) {
@@ -35,34 +36,30 @@ const Servicios = () => {
     };
   }, [isBoxOpen]);
 
-  const openBox = (name: IServicio["name"]) => {
+  const openBox = (servicio: IServicio) => {
+    setSelectedService(servicio);
     setIsBoxOpen(true);
-    setService(name);
+    setSelectedTrabajo(null);
   };
   const closeBox = () => {
     setIsBoxOpen(false);
-    setCurrentSet([]);
-  };
-
-  const showCarousel = (images: IImageSet[]) => {
-    if (images.length > 0) {
-      setCurrentSet(images);
-      setCurrentIndex(0);
-    }
-  };
-
-  const hideCarousel = () => {
-    setCurrentSet([]);
+    setSelectedService(null);
+    setSelectedTrabajo(null);
   };
 
   const prevImage = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + currentSet.length) % currentSet.length
-    );
+    if (selectedTrabajo) {
+      setCurrentIndex(
+        (prev) =>
+          (prev - 1 + selectedTrabajo.imgs.length) % selectedTrabajo.imgs.length
+      );
+    }
   };
 
   const nextImage = () => {
-    setCurrentIndex((prev) => (prev + 1) % currentSet.length);
+    if (selectedTrabajo) {
+      setCurrentIndex((prev) => (prev + 1) % selectedTrabajo.imgs.length);
+    }
   };
 
   return (
@@ -101,16 +98,13 @@ const Servicios = () => {
           })}
         </div>
         {/* Cuadro flotante */}
-        {isBoxOpen && (
+        {isBoxOpen && selectedService && (
           <div
-            className="z-10 pt-8 fixed inset-0 flex items-center 
-            justify-center bg-black bg-opacity-50"
+            className="z-10 pt-8 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
             onClick={closeBox}
           >
             <div
-              className="relative w-3/4 h-3/4 bg-white rounded-md border-2
-               border-primaryB flex flex-col 
-              items-center"
+              className="relative w-3/4 h-3/4 bg-white rounded-md border-2 border-primaryB flex flex-col items-center overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -119,49 +113,62 @@ const Servicios = () => {
               >
                 X
               </button>
-              <div className=" h-3/4">
-                <h1></h1>
+
+              {/* Datos del servicio */}
+              <div className="h-1/4 px-4 text-center space-y-2">
+                <h2 className="text-2xl font-bold text-primaryB">
+                  {selectedService.name}
+                </h2>
+                <p className="text-gray-600">{selectedService.description}</p>
               </div>
-              <div className=" h-1/4 flex space-x-4 mt-4">
+
+              {/* Trabajos relacionados */}
+              <div className="h-1/4 flex flex-wrap justify-center gap-2 overflow-auto">
                 {trabajos
-                  .filter((trabajo) => trabajo.workType === service)
-                  .map((trabajo: ITrabajo) => {
-                    return (
-                      <button
-                        key={trabajo.id}
-                        onClick={() => showCarousel(trabajo.imgs)}
-                        className="bg-gray-200 p-2 h-10"
-                      >
-                        {trabajo.name}
-                      </button>
-                    );
-                  })}
+                  .filter(
+                    (trabajo) => trabajo.workType === selectedService.name
+                  )
+                  .map((trabajo) => (
+                    <button
+                      key={trabajo.id}
+                      onClick={() => {
+                        setSelectedTrabajo(trabajo);
+                        setCurrentIndex(0);
+                      }}
+                      className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+                    >
+                      {trabajo.name}
+                    </button>
+                  ))}
               </div>
+
               {/* Carrusel */}
-              {currentSet.length > 0 && (
-                <div className="relative w-full h-full flex items-center justify-center">
+              {selectedTrabajo && (
+                <div className="relative flex-1 w-full flex items-center justify-center">
                   <button
-                    onClick={hideCarousel}
-                    className="absolute z-30 top-2 right-2 bg-white
-                     text-primaryB border border-primaryB px-[6px] rounded"
+                    onClick={() => setSelectedTrabajo(null)}
+                    className="absolute z-30 top-2 right-2 bg-white text-primaryB border border-primaryB px-[6px] rounded"
                   >
                     X
                   </button>
+
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 bg-gray-300 p-2 z-10"
+                    className="absolute left-4 bg-gray-300 p-2 z-10 rounded"
                   >
                     ⬅
                   </button>
+
                   <Image
-                    src={currentSet[currentIndex].src}
+                    src={selectedTrabajo.imgs[currentIndex].src}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     alt="Imagen"
                   />
+
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 bg-gray-300 p-2 z-10"
+                    className="absolute right-4 bg-gray-300 p-2 z-10 rounded"
                   >
                     ➡
                   </button>

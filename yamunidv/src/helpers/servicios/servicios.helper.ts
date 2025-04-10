@@ -1,6 +1,7 @@
 export interface IServicio {
   id: number;
   name: string;
+  shortDescription: string;
   description: string;
   trabajoId: ITrabajo["id"][];
 }
@@ -16,13 +17,15 @@ export const servicios: IServicio[] = [
   {
     id: 1,
     name: "Aislación térmica",
-    description: "lorem ipsum dolor sit amet, consectetur adipis",
+    shortDescription: "lorem ipsum dolor sit amet, consectetur adipis",
+    description: "lorem ipsum lorem lorem",
     trabajoId: [1, 2],
   },
   {
     id: 2,
     name: "Pintura",
-    description: "lorem ipsum dolorr sit amet, consectetur adipis",
+    shortDescription: "lorem ipsum dolorr sit amet, consectetur adipis",
+    description: "lorem ipsum dolorr sit amet, consectetur adipis piso pisa",
     trabajoId: [1, 2],
   },
 ];

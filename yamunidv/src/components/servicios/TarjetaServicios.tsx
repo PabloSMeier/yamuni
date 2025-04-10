@@ -5,7 +5,7 @@ import { useState } from "react";
 
 type PropsServicio = {
   servicio: IServicio;
-  onOpen: (name: IServicio["name"]) => void;
+  onOpen: (servicio: IServicio) => void;
 };
 const TarjetaServicios = ({ servicio, onOpen }: PropsServicio) => {
   return (
@@ -27,7 +27,7 @@ const TarjetaServicios = ({ servicio, onOpen }: PropsServicio) => {
             </div>
             <div className="flex justify-between items-center mt-auto">
               <button
-                onClick={() => onOpen(servicio.name)}
+                onClick={() => onOpen(servicio)}
                 className="px-4 py-2 bg-white text-accent2 rounded-lg font-semibold hover:bg-opacity-90 transition-colors"
               >
                 Saber más
