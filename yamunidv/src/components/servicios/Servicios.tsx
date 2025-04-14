@@ -2,7 +2,6 @@
 "use client";
 
 import {
-  IImageSet,
   IServicio,
   ITrabajo,
   servicios,
@@ -100,11 +99,11 @@ const Servicios = () => {
         {/* Cuadro flotante */}
         {isBoxOpen && selectedService && (
           <div
-            className="z-10 pt-8 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+            className="z-10 pt-8 fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 flex-col"
             onClick={closeBox}
           >
             <div
-              className="relative w-3/4 h-3/4 bg-white rounded-md border-2 border-primaryB flex flex-col items-center overflow-hidden"
+              className=" p-6 relative w-3/4 h-3/4 bg-white rounded-md border-2 space-y-4 border-primaryB flex flex-col items-center overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -114,16 +113,16 @@ const Servicios = () => {
                 X
               </button>
 
+              <h2 className="text-2xl font-bold text-primaryB flex-none">
+                {selectedService.name}
+              </h2>
               {/* Datos del servicio */}
-              <div className="h-1/4 px-4 text-center space-y-2">
-                <h2 className="text-2xl font-bold text-primaryB">
-                  {selectedService.name}
-                </h2>
+              <div className="max-h-1/2 px-4 text-center space-y-2 overflow-y-auto flex">
                 <p className="text-gray-600">{selectedService.description}</p>
               </div>
 
               {/* Trabajos relacionados */}
-              <div className="h-1/4 flex flex-wrap justify-center gap-2 overflow-auto">
+              <div className="h-1/2 flex flex-wrap justify-center gap-2 overflow-scroll ">
                 {trabajos
                   .filter(
                     (trabajo) => trabajo.workType === selectedService.name
@@ -135,7 +134,8 @@ const Servicios = () => {
                         setSelectedTrabajo(trabajo);
                         setCurrentIndex(0);
                       }}
-                      className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300"
+                      className="bg-primaryB border-primaryB text-gray-200 border-2 px-3 py-1 rounded hover:bg-transparent
+                       hover:text-primaryB transition-all duration-300 ease-in-out w-24 h-12"
                     >
                       {trabajo.name}
                     </button>
@@ -144,31 +144,46 @@ const Servicios = () => {
 
               {/* Carrusel */}
               {selectedTrabajo && (
-                <div className="relative flex-1 w-full flex items-center justify-center">
-                  <button
-                    onClick={() => setSelectedTrabajo(null)}
-                    className="absolute z-30 top-2 right-2 bg-white text-primaryB border border-primaryB px-[6px] rounded"
-                  >
-                    X
-                  </button>
+                <div className=" w-full  flex items-center justify-center">
+                  {/* Botón de cierre del carrusel */}
 
+                  {/* Flecha izquierda */}
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 bg-gray-300 p-2 z-10 rounded"
+                    className="absolute left-4  p-1 z-10 rounded bg-primaryB text-white border border-primaryB 
+             hover:bg-white hover:text-primaryB 
+             transition-all duration-300 ease-in-out 
+                 px-[6px] "
                   >
                     ⬅
                   </button>
 
-                  <Image
-                    src={selectedTrabajo.imgs[currentIndex].src}
-                    fill
-                    className="object-contain"
-                    alt="Imagen"
-                  />
+                  {/* Contenedor de imagen responsiva */}
+                  <div className="relative w-[90%] md:w-[80%] max-w-5xl aspect-[4/3] max-h-[80%]">
+                    <button
+                      onClick={() => setSelectedTrabajo(null)}
+                      className="bg-primaryB text-white border border-primaryB 
+             hover:bg-white hover:text-primaryB 
+             transition-all duration-300 ease-in-out 
+             absolute z-30 top-5 sm:top-6 right-2 px-[6px] rounded"
+                    >
+                      X
+                    </button>
+                    <Image
+                      src={selectedTrabajo.imgs[currentIndex].src}
+                      fill
+                      className="object-contain"
+                      alt="Imagen"
+                    />
+                  </div>
 
+                  {/* Flecha derecha */}
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 bg-gray-300 p-2 z-10 rounded"
+                    className="absolute right-4 p-1 z-10 rounded bg-primaryB text-white border border-primaryB 
+             hover:bg-white hover:text-primaryB 
+             transition-all duration-300 ease-in-out 
+                 px-[6px] "
                   >
                     ➡
                   </button>
